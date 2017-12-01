@@ -19,11 +19,13 @@ class Script {
             var endVal = request.content.alerts[i];
             var elem = {
                 title: "alertname: " + endVal.labels.alertname,
-                value: "<b>instance: </b>" + endVal.labels.instance + "<br>" + "<b>description: </b>" + endVal.annotations.description + "<br>" + "<b>summary: </b>" + endVal.annotations.summary,
+                value: "*instance:* " + endVal.labels.instance,
                 short: false
             };
 
             finFields.push(elem);
+            finFields.push({title: "description", value: endVal.annotations.description});
+            finFields.push({title: "summary", value: endVal.annotations.summary});
         }
 
 
@@ -31,7 +33,7 @@ class Script {
         return {
             content: {
 
-                username: "Alertmanager",
+                username: "Prometheus Alert",
                 attachments: [{
                     color: alertColor,
                     title_link: request.content.externalURL,
@@ -45,8 +47,7 @@ class Script {
 
         return {
             error: {
-                success: false,
-                message: 'Error example'
+                success: false
             }
         };
     }
