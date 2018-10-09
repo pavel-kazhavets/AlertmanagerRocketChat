@@ -40,6 +40,41 @@ If everything is OK you should see alerts like this:
 
 ![alert example](https://i.imgur.com/RSlTSa5.png)
 
+## Testing
+
+In order to test the webhook you can use the following curl (replace <webhook-url>):
+
+```yaml
+curl -X POST -H 'Content-Type: application/json' --data '
+{
+  "text": "Example message",
+  "attachments": [
+    {
+      "title": "Rocket.Chat",
+      "title_link": "https://rocket.chat",
+      "text": "Rocket.Chat, the best open source chat",
+      "image_url": "https://rocket.cha t/images/mockup.png",
+      "color": "#764FA5"
+    }
+  ],
+  "status": "firing",
+  "alerts": [
+    {
+      "labels": {
+        "alertname": "high_load",
+        "instance": "node-exporter:9100"
+      },
+      "annotations": {
+        "description": "node-exporter:9100 of job xxxx is under high load.",
+        "severity": "major",
+        "summary": "node-exporter:9100 under high load."
+      }
+    }
+  ]
+}
+' <webhook-url>
+```
+
 ## NOTES
 
 Alertmanager doesn't actually sends singular alerts - it sends array of current alerts, so it doesn't seem possible for now to split then in separate messages, but if you want, you can configure separate alerts/receivers/webhooks.
