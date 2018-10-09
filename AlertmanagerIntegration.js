@@ -29,6 +29,13 @@ class Script {
                 });
             }
 
+            if (!!endVal.annotations.severity) {
+                finFields.push({
+                    title: "severity",
+                    value: endVal.annotations.severity
+                });
+            }
+
             if (!!endVal.annotations.description) {
                 finFields.push({
                     title: "description",
