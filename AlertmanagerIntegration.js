@@ -1,18 +1,15 @@
 class Script {
-
-
-
     process_incoming_request({
         request
     }) {
-        var alertColor = "warning";
+        console.log(request.content);
 
+        var alertColor = "warning";
         if (request.content.status == "resolved") {
             alertColor = "good";
         } else if (request.content.status == "firing") {
             alertColor = "danger";
         }
-        console.log(request.content);
 
         let finFields = [];
         for (i = 0; i < request.content.alerts.length; i++) {
@@ -24,24 +21,25 @@ class Script {
             };
 
             finFields.push(elem);
-            finFields.push({title: "description", value: endVal.annotations.description});
-            finFields.push({title: "summary", value: endVal.annotations.summary});
+            finFields.push({
+                title: "summary",
+                value: endVal.annotations.summary
+            });
+            finFields.push({
+                title: "description",
+                value: endVal.annotations.description
+            });
         }
-
-
 
         return {
             content: {
-
                 username: "Prometheus Alert",
                 attachments: [{
                     color: alertColor,
                     title_link: request.content.externalURL,
                     title: "Prometheus notification",
-                    fields: finFields,
-
+                    fields: finFields
                 }]
-
             }
         };
 
