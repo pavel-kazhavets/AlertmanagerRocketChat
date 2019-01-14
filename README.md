@@ -1,4 +1,4 @@
-# AlertmanagerRocketChar
+# AlertmanagerRocketChat
 
 ## Overview
 AlertmanagerIntegration is script that will parse webhook notifications coming to Rocket.Chat.
