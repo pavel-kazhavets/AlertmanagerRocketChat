@@ -42,6 +42,13 @@ class Script {
                     value: endVal.annotations.description
                 });
             }
+
+            if (!!endVal.annotations.message) {
+                finFields.push({
+                    title: "message",
+                    value: endVal.annotations.message
+                });
+            }
         }
 
         return {
