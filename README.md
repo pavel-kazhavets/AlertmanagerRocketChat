@@ -1,4 +1,4 @@
-# AlertmanagerRocketChar
+# AlertmanagerRocketChat
 
 ## Overview
 AlertmanagerIntegration is script that will parse webhook notifications coming to Rocket.Chat.
@@ -13,7 +13,7 @@ AlertmanagerIntegration is script that will parse webhook notifications coming t
 
 3) Set all channel, icons, etc. as you need
 
-3) Paste contents of [AlertmanagerIntegrations.js](https://github.com/pavel-kazhavets/AlertmanagerRocketChar/blob/master/AlertmanagerIntegration.js) into Script field.
+3) Paste contents of [AlertmanagerIntegrations.js](https://github.com/pavel-kazhavets/AlertmanagerRocketChat/blob/master/AlertmanagerIntegration.js) into Script field.
 
 4) Create Integration. You;ll see some values apper. Copy WebHook URL and proceed to Alertmanager.
 
