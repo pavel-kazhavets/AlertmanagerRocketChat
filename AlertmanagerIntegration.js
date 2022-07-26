@@ -6,7 +6,7 @@ class Script {
 
         var alertColor = "warning";
         if (request.content.status == "resolved") {
-            alertColor = "good";
+            alertColor = "green";
         } else if (request.content.status == "firing") {
             alertColor = "danger";
         }
@@ -42,11 +42,19 @@ class Script {
                     value: endVal.annotations.description
                 });
             }
+			
+			if (!!endVal.annotations.mention) {
+                finFields.push({
+                    title: "mention",
+                    value: endVal.annotations.mention
+                });
+            }
         }
 
         return {
             content: {
                 username: "Prometheus Alert",
+				text: endVal.annotations.mention,
                 attachments: [{
                     color: alertColor,
                     title_link: request.content.externalURL,
