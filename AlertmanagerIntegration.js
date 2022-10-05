@@ -29,10 +29,10 @@ class Script {
                 });
             }
 
-            if (!!endVal.annotations.severity) {
+            if (!!endVal.labels.severity) {
                 finFields.push({
                     title: "severity",
-                    value: endVal.annotations.severity
+                    value: endVal.labels.severity
                 });
             }
 
@@ -40,6 +40,13 @@ class Script {
                 finFields.push({
                     title: "description",
                     value: endVal.annotations.description
+                });
+            }
+
+            if (!!endVal.annotations.message) {
+                finFields.push({
+                    title: "message",
+                    value: endVal.annotations.message
                 });
             }
         }
