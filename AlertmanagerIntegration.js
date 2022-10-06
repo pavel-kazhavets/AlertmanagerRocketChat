@@ -3,10 +3,10 @@ class Script {
         request
     }) {
         console.log(request.content);
-
+  
         var alertColor = "warning";
         if (request.content.status == "resolved") {
-            alertColor = "good";
+            alertColor = "green";
         } else if (request.content.status == "firing") {
             alertColor = "danger";
         }
@@ -15,40 +15,44 @@ class Script {
         for (i = 0; i < request.content.alerts.length; i++) {
             var endVal = request.content.alerts[i];
             var elem = {
-                title: "alertname: " + endVal.labels.alertname,
-                value: "*instance:* " + endVal.labels.instance,
+                title: "Alertname",
+                value: endVal.labels.alertname,
                 short: false
             };
-
             finFields.push(elem);
 
             if (!!endVal.annotations.summary) {
                 finFields.push({
-                    title: "summary",
+                    title: "Summary",
                     value: endVal.annotations.summary
                 });
             }
 
             if (!!endVal.labels.severity) {
                 finFields.push({
-                    title: "severity",
+                    title: "Severity",
                     value: endVal.labels.severity
                 });
             }
 
             if (!!endVal.annotations.description) {
                 finFields.push({
-                    title: "description",
+                    title: "Description",
                     value: endVal.annotations.description
                 });
             }
 
             if (!!endVal.annotations.message) {
                 finFields.push({
-                    title: "message",
+                    title: "Message",
                     value: endVal.annotations.message
                 });
             }
+
+            finFields.push({
+                title: "Labels",
+                value: getLabelsField(endVal.labels)
+            });
         }
 
         return {
@@ -62,5 +66,17 @@ class Script {
                 }]
             }
         };
+    }
+
+    getLabelsField(labelsObj) {
+        let labelsArr = [];
+        for (const key of Object.keys(labelsObj)) {
+            if (key == "alertname" || key == "severity") {
+                continue;
+            }
+            labelsArr.push(key+"="+labelsObj[key]);
+        }
+
+        return labelsArr.join(", ");
     }
 }
