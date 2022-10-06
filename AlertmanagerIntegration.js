@@ -3,7 +3,7 @@ class Script {
         request
     }) {
         console.log(request.content);
-  
+
         var alertColor = "warning";
         if (request.content.status == "resolved") {
             alertColor = "green";
