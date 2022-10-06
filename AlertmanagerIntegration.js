@@ -62,11 +62,5 @@ class Script {
                 }]
             }
         };
-
-        return {
-            error: {
-                success: false
-            }
-        };
     }
 }
