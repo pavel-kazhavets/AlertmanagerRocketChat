@@ -51,7 +51,7 @@ class Script {
 
             finFields.push({
                 title: "Labels",
-                value: getLabelsField(endVal.labels)
+                value: this.getLabelsField(endVal.labels)
             });
         }
 
