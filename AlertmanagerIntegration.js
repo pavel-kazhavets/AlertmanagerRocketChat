@@ -101,7 +101,7 @@ class Script {
     getLabelsField(labelsObj) {
         let labelsArr = [];
         for (const key of Object.keys(labelsObj)) {
-            if (key == "alertname" || key == "severity") {
+            if (key == "alertname") {
                 continue;
             }
             labelsArr.push("`"+key+"="+labelsObj[key]+"`");
@@ -111,9 +111,9 @@ class Script {
     getLabelsURL(labelsObj) {
         let labelsArr = [];
         for (const key of Object.keys(labelsObj)) {
-            labelsArr.push(key+"%3D"+labelsObj[key]);
+            labelsArr.push("matcher="+encodeURIComponent(key+"="+labelsObj[key]));
         }
-        return labelsArr.join("&matcher=");
+        return labelsArr.join("&");
     }
 
     getActionButtons(endVal) {
