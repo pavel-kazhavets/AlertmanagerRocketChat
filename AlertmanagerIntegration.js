@@ -8,9 +8,11 @@ class Script {
         
         var commonText = "";
         let alerts = [];
-        if (!!request.content.groupLabels) {
+
+        // show only commonText if there is more than 2 alerts
+        if (!!request.content.groupLabels && request.content.alerts.length > 1) {
             commonText = this.getCommonText(request.content);
-        };
+        }
         for (i = 0; i < request.content.alerts.length; i++) {
             let finFields = [];
             // default color
@@ -136,9 +138,9 @@ class Script {
         let commonAnnotations = [];
         if (!!content.groupLabels) {
             for (const key of Object.keys(content.groupLabels)) {
-                if (key == "alertname" || key == "severity") {
-                    continue;
-                }
+                // if (key == "x") {
+                //     continue;
+                // }
                 groupLabels.push("`"+key+"="+content.groupLabels[key]+"`");
             }
             commonText.push("Alerts are grouped by: "+groupLabels.join(", "));
@@ -146,9 +148,9 @@ class Script {
 
         if (!!content.commonLabels) {
             for (const key of Object.keys(content.commonLabels)) {
-                if (key == "alertname" || key == "severity") {
-                    continue;
-                }
+                // if (key == "x") {
+                //     continue;
+                // }
                 commonLabels.push("`"+key+"="+content.commonLabels[key]+"`");
             }
             commonText.push("Common labels: " + commonLabels.join(", "));
@@ -156,12 +158,12 @@ class Script {
 
         if (!!content.commonAnnotations) {
             for (const key of Object.keys(content.commonAnnotations)) {
-                if (key == "alertname" || key == "severity") {
+                if (key == "silence_url" || key == "dashboard_url" || key == "runbook_url" || key == "__dashboardUid__" || key == "__panelId__" || key == "__alertId__") {
                     continue;
                 }
-                commonAnnotations.push("**"+key+"**: "+content.commonAnnotations[key]+"\n");
+                commonAnnotations.push("**"+key+"**: "+content.commonAnnotations[key]);
             }
-            commonText.push(commonAnnotations.join(", "));
+            commonText.push(commonAnnotations.join("\n"));
         };
 
         return commonText.join("\n");
